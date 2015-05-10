@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="estimote-sdk-preview"><source path="/Users/sebastian/projects/ecomhack/dev/Android-SDK/Demos/build/intermediates/exploded-aar/estimote-sdk-preview/assets"/></dataSet><dataSet config="main"><source path="/Users/sebastian/projects/ecomhack/dev/Android-SDK/Demos/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/sebastian/projects/ecomhack/dev/Android-SDK/Demos/src/debug/assets"/></dataSet></merger>

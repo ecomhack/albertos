@@ -1,0 +1,4 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/Users/sebastian/projects/ecomhack/dev/albertos-api/conf/application.conf,/Users/sebastian/projects/ecomhack/dev/albertos-api/target/scala-2.11/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/sebastian/projects/ecomhack/dev/albertos-api/conf/routes,/Users/sebastian/projects/ecomhack/dev/albertos-api/target/scala-2.11/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/Users/sebastian/projects/ecomhack/dev/albertos-api/conf/sphere.conf,/Users/sebastian/projects/ecomhack/dev/albertos-api/target/scala-2.11/classes/sphere.conf)[0m

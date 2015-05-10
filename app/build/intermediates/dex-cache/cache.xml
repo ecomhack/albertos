@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/sebastian/projects/ecomhack/dev/Android-SDK/Demos/build/intermediates/exploded-aar/estimote-sdk-preview/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="6204978642c235d9010669d389d4b09dc81329e5">
+        <dex dex="/Users/sebastian/projects/ecomhack/dev/Android-SDK/Demos/build/intermediates/pre-dexed/debug/classes-b487e76b080a218c53ea6f1adf374c9b8158b8e0.jar" />
+    </item>
+
+</items>
