@@ -19,7 +19,6 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Shows the menu for the current date.
@@ -28,7 +27,7 @@ import java.util.UUID;
  */
 
 public class ViewCheckout extends Activity{
-
+    Cart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +35,17 @@ public class ViewCheckout extends Activity{
 
         setContentView(R.layout.checkout);
 
-        final Cart cart = AlfredosUserApplication.cart;
+        cart = AlbertosUserApplication.cart;
 
         final Button payButton = (Button) findViewById(R.id.payment);
-        payButton.setText(String.format("Pay now (Total: %.2f Euro)", (float) cart.getTotal() / 100));
+        payButton.setText(String.format("Confirm Payment and check out with Paypal (Total: %.2f Euro)", (float) cart.getTotal() / 100));
 
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new PlaceOrderTask().execute();
                 Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), ViewCheckout.class);
+                intent.setClass(getApplicationContext(), RecognizeBeacon.class);
                 startActivity(intent);
             }
 
@@ -58,14 +57,13 @@ public class ViewCheckout extends Activity{
 
         protected Integer doInBackground(String... params) {
             try {
-                URL url = new URL(AlfredosUserApplication.ApiURL + "/orders");
+                URL url = new URL(AlbertosUserApplication.ApiURL + "/orders");
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(url.toString());
 
                 ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
-                postParams.add(new BasicNameValuePair("user", UUID.randomUUID().toString()));
+                postParams.add(new BasicNameValuePair("user", "a29eda3c-5cc2-4afc-bd37-6d2723fc5551"));
                 post.setEntity(new UrlEncodedFormEntity(postParams));
-
                 client.execute(post);
             } catch (IOException e) {
                 e.printStackTrace();

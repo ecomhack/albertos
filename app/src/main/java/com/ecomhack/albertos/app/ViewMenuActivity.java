@@ -57,7 +57,7 @@ public class ViewMenuActivity extends Activity {
 
     protected Integer doInBackground(String... params) {
       try {
-        URL url = new URL(AlfredosUserApplication.ApiURL + "/products");
+        URL url = new URL(AlbertosUserApplication.ApiURL + "/products");
         HttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(url.toString());
         HttpResponse response = client.execute(get);
@@ -82,7 +82,7 @@ public class ViewMenuActivity extends Activity {
 
     protected void fillProductList()
     {
-      final Cart cart = AlfredosUserApplication.cart;
+      final Cart cart = AlbertosUserApplication.cart;
       final Button orderButton = (Button) findViewById(R.id.order);
 
       LinearLayout productsContainer = (LinearLayout) findViewById(R.id.products);
@@ -90,14 +90,15 @@ public class ViewMenuActivity extends Activity {
       for (final FoodItem item : products) {
         Button button = new Button(getApplicationContext());
         button.setText(item.toString());
+        orderButton.setText(String.format("Go To Cart (Total: %.2f €)", (float) cart.getTotal() / 100));
         button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                      cart.addItem(item);
-                                      orderButton.setText(String.format("Go To Cart (Total: %.2f €)", (float) cart.getTotal() / 100));
-                                      Toast.makeText(getApplicationContext(), String.format("%s was added to your cart.", item.getName()), Toast.LENGTH_SHORT).show();
-                                    }
-                                  }
+              cart.addItem(item);
+              orderButton.setText(String.format("Go To Cart (Total: %.2f €)", (float) cart.getTotal() / 100));
+              Toast.makeText(getApplicationContext(), String.format("%s was added to your cart.", item.getName()), Toast.LENGTH_SHORT).show();
+            }
+          }
         );
         productsContainer.addView(button);
       }

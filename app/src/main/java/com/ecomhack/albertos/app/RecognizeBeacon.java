@@ -12,6 +12,9 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
@@ -33,12 +36,17 @@ public class RecognizeBeacon extends Activity {
     private BeaconManager beaconManager;
     private NotificationManager notificationManager;
     private Region region;
+    Cart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.recognize_beacon);
+
         region = new Region("regionId", "b9407f30-f5f8-466e-aff9-25556b57fe6d", 48735, 25);
+
+        cart = AlbertosUserApplication.cart;
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -108,8 +116,8 @@ public class RecognizeBeacon extends Activity {
                 new Intent[]{notifyIntent},
                 PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(RecognizeBeacon.this)
-                .setSmallIcon(R.drawable.beacon_gray)
-                .setContentTitle("Notify Demo")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Alfredo's")
                 .setContentText(msg)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
@@ -123,7 +131,7 @@ public class RecognizeBeacon extends Activity {
     private class OrderUpdateTask extends AsyncTask<String, Void, Integer> {
         protected Integer doInBackground(String... orderIDs) {
             try {
-                URL url = new URL(AlfredosUserApplication.ApiURL + "/orders/" + orderIDs[0]);
+                URL url = new URL(AlbertosUserApplication.ApiURL + "/orders/" + orderIDs[0]);
                 HttpClient client = new DefaultHttpClient();
                 HttpPut put = new HttpPut(url.toString());
 
@@ -142,7 +150,16 @@ public class RecognizeBeacon extends Activity {
         }
 
         protected void onPostExecute(Integer result) {
-            postNotification("" + result);
+            if (result == 200) {
+                ProgressBar spinner = (ProgressBar)findViewById(R.id.progressBar);
+                spinner.setVisibility(View.GONE);
+                TextView button = (TextView)findViewById(R.id.labelBeaconFoundNotififaction);
+                button.setVisibility(View.VISIBLE);
+
+                cart.clear();
+
+                postNotification("Your meal will be prepared!");
+            }
         }
     }
 }
